@@ -72,4 +72,33 @@ orders_df.to_sql('orders', con=engine, if_exists='replace', index=False)
 order_products_df.to_sql('order_products', con=engine, if_exists='replace', index=False)
 
 print("All data uploaded successfully!")
+```
+
+Once the data was uploaded, I wrote SQL queries inside Jupyter Notebook to analyze the data, create temporary tables, and join the datasets.These queries helped me join different tables, summarize important data, and find patterns in customer behavior.
+
+## 1️⃣ Order Information
+
+I created a temporary table that joins the orders, order_products, and products tables to get complete information about each order — including product name, department, and aisle details.
+
+```md
+python
+cursor.execute("""
+ create temporary table product_info as 
+ select 
+ product_id, product_name,count(*) as total_orders, sum(reordered) as total_reorders,avg(add_to_cart_order) as avg_cart_order 
+ from order_info 
+ group by product_id,product_name ;
+""")
+```
+This was the main query in my analysis — I used this table later to explore patterns like the most purchased products, reorder rates, and order timings.
+It helped me understand how different datasets in the e-commerce system are connected and how SQL joins can be used to uncover business insights.
+### Amrutha Nagothi
+- 📧 amruthanagothi@gmail.com
+- 🌐 [Linkedin](www.linkedin.com/in/amrutha-nagothi-3s)           [GitHub](https://github.com/ammu105)
+
+
+<p align="center">
+  Thank you for reviewing this project 💻❤️
+</p>
+
 
